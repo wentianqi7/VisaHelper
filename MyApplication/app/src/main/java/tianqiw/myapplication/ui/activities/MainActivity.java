@@ -3,12 +3,13 @@ package tianqiw.myapplication.ui.activities;
 import android.support.v4.app.Fragment;
 
 import tianqiw.myapplication.ui.fragments.DocChecklistFragment;
+import tianqiw.myapplication.ui.fragments.HeaderFragment;
 
 public class MainActivity extends MultiFragmentActivity {
 
     @Override
     protected Fragment createHeaderFragment() {
-        return null;
+        return new HeaderFragment();
     }
 
     @Override

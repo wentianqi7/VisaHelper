@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 
 import tianqiw.myapplication.ui.fragments.DocContentFragment;
 import tianqiw.myapplication.ui.fragments.DocImageListFragment;
+import tianqiw.myapplication.ui.fragments.HeaderFragment;
 
 /**
  * Created by STuotuo.Wen on 2016/3/27.
@@ -11,7 +12,7 @@ import tianqiw.myapplication.ui.fragments.DocImageListFragment;
 public class DocActivity extends MultiFragmentActivity {
     @Override
     protected Fragment createHeaderFragment() {
-        return null;
+        return new HeaderFragment();
     }
 
     @Override
