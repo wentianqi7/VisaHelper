@@ -1,9 +1,16 @@
 package tianqiw.myapplication.ui.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.WindowManager;
 
 import tianqiw.myapplication.R;
@@ -11,7 +18,7 @@ import tianqiw.myapplication.R;
 /**
  * Created by STuotuo.Wen on 2016/3/27.
  */
-public abstract class MultiFragmentActivity extends FragmentActivity {
+public abstract class MultiFragmentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     protected abstract Fragment createHeaderFragment();
     protected abstract Fragment createBodyFragment();
     protected abstract Fragment createFooterFragment();
@@ -22,7 +29,21 @@ public abstract class MultiFragmentActivity extends FragmentActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        setContentView(R.layout.multi_fragment_template);
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        setContentView(R.layout.ui_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         FragmentManager manager = getSupportFragmentManager();
 
         // content fragment
@@ -57,5 +78,30 @@ public abstract class MultiFragmentActivity extends FragmentActivity {
                         .commit();
             }
         }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camara) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

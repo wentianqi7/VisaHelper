@@ -22,7 +22,8 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent();
-                intent.setClass(WelcomeActivity.this, MainActivity.class);
+                //intent.setClass(WelcomeActivity.this, MainActivity.class);
+                intent.setClass(WelcomeActivity.this, FlowActivity.class);
                 startActivity(intent);
             }
         }, 2000);

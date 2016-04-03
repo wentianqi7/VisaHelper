@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorTaskTrue"
+    android:animateLayoutChanges="true">
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Task Title"
+        android:textSize="25sp"
+        style="@style/autoscroll"
+        android:maxWidth="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"/>
+
+    <TextView
+        android:id="@+id/item_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="checked on mm-dd-yyyy hh:mm"
+        android:textSize="15sp"
+        android:layout_below="@+id/item_title"
+        android:layout_alignLeft="@+id/item_title"
+        android:layout_alignStart="@+id/item_title"
+        android:layout_marginBottom="10dp"/>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioButton"
+        android:layout_marginTop="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="dummy description"
+        android:visibility="gone"
+        android:textColor="@color/colorLight"
+        android:background="@color/colorPrimaryDark"
+        android:layout_below="@id/item_status"
+        android:id="@+id/description"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"/>
+</RelativeLayout>

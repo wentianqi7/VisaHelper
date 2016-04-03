@@ -61,7 +61,7 @@ public class DocChecklistFragment extends ListFragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = getActivity().getLayoutInflater()
-                        .inflate(R.layout.doc_checklist_fragment, null);
+                        .inflate(R.layout.checklist_item, null);
             }
 
             final DocRecord dr = getItem(position);
