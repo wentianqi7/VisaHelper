@@ -11,12 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import tianqiw.myapplication.R;
 import tianqiw.myapplication.model.TaskItem;
 import tianqiw.myapplication.ui.activities.DocActivity;
+import tianqiw.myapplication.utils.XmlParserHandler;
 
 /**
  * Created by STuotuo.Wen on 2016/4/2.
@@ -44,10 +48,11 @@ public class TaskListFragment extends ListFragment {
         if (taskItemList == null) {
             return;
         }
+
+        XmlParserHandler xmlParserHandler = new XmlParserHandler();
         switch (visaType) {
             case "F1":
-                taskItemList.add(new TaskItem(0, "Go to the website", "This is the description for the first task."));
-                taskItemList.add(new TaskItem(1, "Register", "This is the description for the second task."));
+                taskItemList = xmlParserHandler.parse(getResources().openRawResource(R.raw.f1_tasks));
                 break;
         }
     }

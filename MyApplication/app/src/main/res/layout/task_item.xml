@@ -12,7 +12,7 @@
         android:text="Task Title"
         android:textSize="25sp"
         style="@style/autoscroll"
-        android:maxWidth="200dp"
+        android:maxWidth="350dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"/>
 
@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:text="dummy description"
         android:visibility="gone"
+        android:textSize="18sp"
         android:textColor="@color/colorLight"
         android:background="@color/colorPrimaryDark"
         android:layout_below="@id/item_status"

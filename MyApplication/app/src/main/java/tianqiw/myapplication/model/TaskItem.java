@@ -13,6 +13,15 @@ public class TaskItem {
     private String status;
     private String description;
 
+    public TaskItem() {
+        tid = 0;
+        title = "undefined";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        date = sdf.format(new Date());
+        status = "created";
+        description = "";
+    }
+
     public TaskItem(int tid, String title, String description) {
         this.tid = tid;
         this.title = title;
@@ -20,6 +29,14 @@ public class TaskItem {
         this.date = sdf.format(new Date());
         this.status = "created";
         this.description = description;
+    }
+
+    public void setTid(int tid) {
+        this.tid = tid;
+    }
+
+    public int getTid() {
+        return tid;
     }
 
     public void setTitle(String title) {
