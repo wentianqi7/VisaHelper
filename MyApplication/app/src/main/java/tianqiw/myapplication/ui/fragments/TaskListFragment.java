@@ -3,23 +3,17 @@ package tianqiw.myapplication.ui.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import tianqiw.myapplication.R;
 import tianqiw.myapplication.model.TaskItem;
-import tianqiw.myapplication.ui.activities.DocActivity;
+import tianqiw.myapplication.model.enums.VisaType;
 import tianqiw.myapplication.utils.XmlParserHandler;
 
 /**
@@ -31,7 +25,7 @@ public class TaskListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String visaType = "F1";
+        VisaType visaType = VisaType.F1;
         getActivity().setTitle(String.format("VisaHelper - %s", visaType));
         taskItemList = new ArrayList<TaskItem>();
         initTasks(visaType);
@@ -44,14 +38,14 @@ public class TaskListFragment extends ListFragment {
         ((TaskAdapter) getListAdapter()).notifyDataSetChanged();
     }
 
-    private void initTasks(String visaType) {
+    private void initTasks(VisaType visaType) {
         if (taskItemList == null) {
             return;
         }
 
         XmlParserHandler xmlParserHandler = new XmlParserHandler();
         switch (visaType) {
-            case "F1":
+            case F1:
                 taskItemList = xmlParserHandler.parse(getResources().openRawResource(R.raw.f1_tasks));
                 break;
         }

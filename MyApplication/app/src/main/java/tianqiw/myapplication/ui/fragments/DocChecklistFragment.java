@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tianqiw.myapplication.model.DocRecord;
+import tianqiw.myapplication.model.enums.VisaType;
 import tianqiw.myapplication.ui.activities.DocActivity;
 
 /**
@@ -26,7 +27,7 @@ public class DocChecklistFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         docRecordList = new ArrayList<DocRecord>();
-        initRecords("F1");
+        initRecords(VisaType.F1);
         DocAdapter adapter = new DocAdapter(docRecordList);
         setListAdapter(adapter);
     }
@@ -36,12 +37,12 @@ public class DocChecklistFragment extends ListFragment {
         ((DocAdapter) getListAdapter()).notifyDataSetChanged();
     }
 
-    private void initRecords(String visaType) {
+    private void initRecords(VisaType visaType) {
         if (docRecordList == null) {
             return;
         }
         switch(visaType) {
-            case "F1":
+            case F1:
                 docRecordList.add(new DocRecord(0, "Passport"));
                 docRecordList.add(new DocRecord(1, "DS-160"));
                 docRecordList.add(new DocRecord(4, "Fee Payment"));

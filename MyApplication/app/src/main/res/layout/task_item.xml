@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorTaskTrue"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="false">
 
     <TextView
         android:id="@+id/item_title"

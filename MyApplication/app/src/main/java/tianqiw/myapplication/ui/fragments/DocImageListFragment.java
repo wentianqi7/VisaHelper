@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tianqiw.myapplication.R;
+import tianqiw.myapplication.model.enums.DocType;
 
 /**
  * Created by STuotuo.Wen on 2016/3/27.
@@ -23,7 +24,7 @@ public class DocImageListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imageList = new ArrayList<String>();
-        initRecords("DS160");
+        initRecords(DocType.DS160);
         DocAdapter adapter = new DocAdapter(imageList);
         setListAdapter(adapter);
     }
@@ -33,12 +34,12 @@ public class DocImageListFragment extends ListFragment {
         ((DocAdapter) getListAdapter()).notifyDataSetChanged();
     }
 
-    private void initRecords(String docTitle) {
+    private void initRecords(DocType docType) {
         if (imageList == null) {
             return;
         }
-        switch(docTitle) {
-            case "DS160":
+        switch(docType) {
+            case DS160:
                 imageList.add("");
                 imageList.add("");
                 break;
