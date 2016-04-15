@@ -25,7 +25,7 @@ public class TaskListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        VisaType visaType = VisaType.F1;
+        VisaType visaType = VisaType.values()[getArguments().getInt(getString(R.string.visa_type))];
         getActivity().setTitle(String.format("VisaHelper - %s", visaType));
         taskItemList = new ArrayList<TaskItem>();
         initTasks(visaType);
@@ -73,18 +73,17 @@ public class TaskListFragment extends ListFragment {
                     (TextView) convertView.findViewById(R.id.item_status);
             statusView.setText(task.getDate());
 
-            final TextView descpView = (TextView) convertView.findViewById(R.id.description);
-            descpView.setText(task.getDescription());
+            final TextView descriptionView = (TextView) convertView.findViewById(R.id.description);
+            descriptionView.setText(task.getDescription());
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (descpView.getVisibility() == View.VISIBLE) {
-                        descpView.setVisibility(View.GONE);
+                    if (descriptionView.getVisibility() == View.VISIBLE) {
+                        descriptionView.setVisibility(View.GONE);
                     } else {
-                        descpView.setVisibility(View.VISIBLE);
+                        descriptionView.setVisibility(View.VISIBLE);
                     }
-                    // Log.e("[click]", Integer.toString(descpView.getLayoutParams().height));
                 }
             });
             return convertView;

@@ -18,14 +18,14 @@ import tianqiw.myapplication.model.enums.VisaType;
  */
 public class DBAdapter implements TaskCRUD, ConfigCRUD, ConstQuery {
     private SQLiteDatabase db;
-    private DBOpenHelper dbConn;
+    private DBOpenHelper conn;
 
     public DBAdapter(Context context) {
-        dbConn = new DBOpenHelper(context, DATABASE, null, 1);
+        conn = new DBOpenHelper(context, DATABASE, null, 1);
     }
 
     public void open() throws SQLException {
-        db = dbConn.getWritableDatabase();
+        db = conn.getWritableDatabase();
     }
 
     public void close() {

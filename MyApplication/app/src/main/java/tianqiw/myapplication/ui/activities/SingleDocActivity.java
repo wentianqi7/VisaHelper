@@ -2,11 +2,14 @@ package tianqiw.myapplication.ui.activities;
 
 import android.support.v4.app.Fragment;
 
-import tianqiw.myapplication.ui.fragments.DocChecklistFragment;
+import tianqiw.myapplication.ui.fragments.DocContentFragment;
+import tianqiw.myapplication.ui.fragments.DocImageListFragment;
 import tianqiw.myapplication.ui.fragments.HeaderFragment;
 
-public class MainActivity extends MultiFragmentActivity {
-
+/**
+ * Created by STuotuo.Wen on 2016/3/27.
+ */
+public class SingleDocActivity extends MultiFragmentActivity {
     @Override
     protected Fragment createHeaderFragment() {
         return new HeaderFragment();
@@ -14,12 +17,11 @@ public class MainActivity extends MultiFragmentActivity {
 
     @Override
     protected Fragment createBodyFragment() {
-        return new DocChecklistFragment();
+        return new DocContentFragment();
     }
 
     @Override
     protected Fragment createFooterFragment() {
-        return null;
+        return new DocImageListFragment();
     }
-
 }

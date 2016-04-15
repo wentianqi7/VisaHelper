@@ -15,7 +15,7 @@ import java.util.List;
 
 import tianqiw.myapplication.model.DocRecord;
 import tianqiw.myapplication.model.enums.VisaType;
-import tianqiw.myapplication.ui.activities.DocActivity;
+import tianqiw.myapplication.ui.activities.SingleDocActivity;
 
 /**
  * Created by STuotuo.Wen on 2016/3/27.
@@ -82,7 +82,7 @@ public class DocChecklistFragment extends ListFragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setClass(getActivity(), DocActivity.class);
+                    intent.setClass(getActivity(), SingleDocActivity.class);
                     startActivity(intent);
                 }
             });
