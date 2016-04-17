@@ -6,6 +6,9 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -72,6 +75,19 @@ public class TaskListFragment extends ListFragment {
             TextView statusView =
                     (TextView) convertView.findViewById(R.id.item_status);
             statusView.setText(task.getDate());
+
+            CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
+            final View tempView = convertView;
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        tempView.setBackgroundColor(getResources().getColor(R.color.colorTaskFalse));
+                    } else {
+                        tempView.setBackgroundColor(getResources().getColor(R.color.colorTaskTrue));
+                    }
+                }
+            });
 
             final TextView descriptionView = (TextView) convertView.findViewById(R.id.description);
             descriptionView.setText(task.getDescription());

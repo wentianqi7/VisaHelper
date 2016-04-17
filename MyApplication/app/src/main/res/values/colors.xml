@@ -5,4 +5,5 @@
     <color name="colorAccent">#60d778</color>
     <color name="colorLight">#dcdbdb</color>
     <color name="colorTaskTrue">#d3ecf2</color>
+    <color name="colorTaskFalse">#a1a0a0</color>
 </resources>

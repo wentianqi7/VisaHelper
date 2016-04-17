@@ -1,19 +1,23 @@
 package tianqiw.myapplication.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
 import tianqiw.myapplication.R;
+import tianqiw.myapplication.entity.ConfigManager;
+import tianqiw.myapplication.model.ConfigData;
+import tianqiw.myapplication.model.enums.VisaType;
 
 /**
  * Created by STuotuo.Wen on 2016/3/27.
@@ -26,10 +30,9 @@ public abstract class MultiFragmentActivity extends AppCompatActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        //overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        // getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         setContentView(R.layout.ui_main);
 
         // add toolbar and navigation drawer
@@ -86,19 +89,33 @@ public abstract class MultiFragmentActivity extends AppCompatActivity implements
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent = getIntent();
 
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        switch(id) {
+            case R.id.nav_camara:
 
-        } else if (id == R.id.nav_slideshow) {
+                break;
+            case R.id.nav_gallery:
 
-        } else if (id == R.id.nav_manage) {
+                break;
+            case R.id.nav_slideshow:
 
-        } else if (id == R.id.nav_share) {
+                break;
+            case R.id.nav_manage:
 
-        } else if (id == R.id.nav_send) {
-
+                break;
+            case R.id.nav_f1:
+                ConfigManager.get(this).updateConfig(0, VisaType.F1);
+                intent.putExtra(getString(R.string.visa_type), VisaType.F1.getValue());
+                finish();
+                startActivity(intent);
+                break;
+            case R.id.nav_j1:
+                ConfigManager.get(this).updateConfig(0, VisaType.J1);
+                intent.putExtra(getString(R.string.visa_type), VisaType.J1.getValue());
+                finish();
+                startActivity(intent);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

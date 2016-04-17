@@ -27,13 +27,15 @@
         android:layout_alignStart="@+id/item_title"
         android:layout_marginBottom="10dp"/>
 
-    <RadioButton
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton"
+        android:id="@+id/checkbox"
+        android:scaleX="1.7"
+        android:scaleY="1.7"
         android:layout_marginTop="18dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp" />
+        android:layout_marginRight="20dp" />
 
     <TextView
         android:layout_width="match_parent"

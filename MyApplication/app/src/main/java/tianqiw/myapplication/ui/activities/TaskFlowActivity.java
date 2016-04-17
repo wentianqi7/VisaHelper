@@ -1,9 +1,14 @@
 package tianqiw.myapplication.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.MenuItem;
 
 import tianqiw.myapplication.R;
+import tianqiw.myapplication.entity.ConfigManager;
+import tianqiw.myapplication.model.ConfigData;
+import tianqiw.myapplication.model.TaskItem;
 import tianqiw.myapplication.model.enums.VisaType;
 import tianqiw.myapplication.ui.fragments.DocChecklistFragment;
 import tianqiw.myapplication.ui.fragments.HeaderFragment;
