@@ -12,5 +12,9 @@ public interface ConstQuery {
 
     String CREATE_TASK_TABLE = "CREATE TABLE task" +
             "(tid INTEGER PRIMARY KEY," +
-            "status INTEGER);";
+            "title VARCHAR(50)," +
+            "type INTEGER," +
+            "date VARCHAR(30)," +
+            "status INTEGER," +
+            "description TEXT);";
 }

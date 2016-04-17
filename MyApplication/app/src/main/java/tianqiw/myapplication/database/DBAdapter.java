@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tianqiw.myapplication.model.ConfigData;
+import tianqiw.myapplication.model.TaskItem;
 import tianqiw.myapplication.model.enums.TaskStatus;
 import tianqiw.myapplication.model.enums.VisaType;
 
@@ -34,7 +35,7 @@ public class DBAdapter implements TaskCRUD, ConfigCRUD, ConstQuery {
         }
     }
 
-    public void createTask(int tid, TaskStatus status) {
+    public void createTask(TaskItem task) {
         try {
             open();
         } catch (SQLException e) {
@@ -42,48 +43,57 @@ public class DBAdapter implements TaskCRUD, ConfigCRUD, ConstQuery {
         }
 
         ContentValues tempTask = new ContentValues();
-        tempTask.put("tid", tid);
-        tempTask.put("status", status.getValue());
+        tempTask.put("tid", task.getTid());
+        tempTask.put("title", task.getTitle());
+        tempTask.put("type", task.getType().getValue());
+        tempTask.put("date", task.getDate());
+        tempTask.put("status", task.getStatus().getValue());
+        tempTask.put("description", task.getDescription());
 
         db.insert("task", null, tempTask);
         close();
     }
 
-    public TaskStatus readTaskById(int tid) {
+    public TaskItem readTaskById(int tid) {
         try {
             open();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        TaskStatus status = null;
+        TaskItem task = null;
         Cursor cursor = db.query("task", null, "tid=" + tid, null, null, null, null);
         if (cursor.moveToNext()) {
             try {
-                status = TaskStatus.values()[cursor.getInt(1)];
+                task = new TaskItem(cursor.getInt(0), cursor.getString(1),
+                        VisaType.values()[cursor.getInt(2)],cursor.getString(3),
+                        TaskStatus.values()[cursor.getInt(4)], cursor.getString(5));
             } catch (Exception e) {
                 e.printStackTrace();
-                status = TaskStatus.UNDEFINED;
+                task = new TaskItem(TaskStatus.UNDEFINED);
             }
         }
         close();
-        return status;
+        return task;
     }
 
     /**
      * @param status
      * @return list of task ids that match the status
      */
-    public List<Integer> readTaskByStatus(TaskStatus status) {
+    public List<TaskItem> readTasksByStatus(TaskStatus status) {
         try {
             open();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        List<Integer> taskList = new ArrayList<Integer>();
+        List<TaskItem> taskList = new ArrayList<TaskItem>();
+        // task item: tid, title, date, status, description
         Cursor cursor = db.query("task", null, "status=" + status.getValue(), null, null, null, null);
         while (cursor.moveToNext()) {
             try {
-                taskList.add(cursor.getInt(0));
+                taskList.add(new TaskItem(cursor.getInt(0), cursor.getString(1),
+                        VisaType.values()[cursor.getInt(2)],cursor.getString(3),
+                        TaskStatus.values()[cursor.getInt(4)], cursor.getString(5)));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -94,23 +104,26 @@ public class DBAdapter implements TaskCRUD, ConfigCRUD, ConstQuery {
 
     /**
      * @return all task status in id order
+     * @param type
      */
-    public List<TaskStatus> readAllTasks() {
+    public List<TaskItem> readAllTasksWithType(VisaType type) {
         try {
             open();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        List<TaskStatus> taskList = new ArrayList<TaskStatus>();
-        Cursor cursor = db.query("task", null, null, null, null, null, null);
+        List<TaskItem> taskList = new ArrayList<TaskItem>();
+        Cursor cursor = db.query("task", null, "type=" + type.getValue(), null, null, null, null);
         while (cursor.moveToNext()) {
-            taskList.add(TaskStatus.values()[cursor.getInt(1)]);
+            taskList.add(new TaskItem(cursor.getInt(0), cursor.getString(1),
+                    VisaType.values()[cursor.getInt(2)],cursor.getString(3),
+                    TaskStatus.values()[cursor.getInt(4)], cursor.getString(5)));
         }
         close();
         return taskList;
     }
 
-    public void updateTask(int tid, TaskStatus newStatus) {
+    public void updateTaskStatus(int tid, TaskStatus newStatus) {
         try {
             open();
         } catch (SQLException e) {

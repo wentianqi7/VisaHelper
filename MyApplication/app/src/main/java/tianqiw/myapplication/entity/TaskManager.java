@@ -6,7 +6,9 @@ import java.util.List;
 
 import tianqiw.myapplication.database.DBAdapter;
 import tianqiw.myapplication.database.TaskCRUD;
+import tianqiw.myapplication.model.TaskItem;
 import tianqiw.myapplication.model.enums.TaskStatus;
+import tianqiw.myapplication.model.enums.VisaType;
 
 /**
  * Created by STuotuo.Wen on 2016/4/14.
@@ -28,24 +30,24 @@ public class TaskManager implements TaskCRUD {
         return manager;
     }
 
-    public void createTask(int tid, TaskStatus status) {
-        adapter.createTask(tid, status);
+    public void createTask(TaskItem task) {
+        adapter.createTask(task);
     }
 
-    public TaskStatus readTaskById(int tid) {
+    public TaskItem readTaskById(int tid) {
         return adapter.readTaskById(tid);
     }
 
-    public  List<Integer> readTaskByStatus(TaskStatus status) {
-        return manager.readTaskByStatus(status);
+    public List<TaskItem> readTasksByStatus(TaskStatus status) {
+        return manager.readTasksByStatus(status);
     }
 
-    public List<TaskStatus> readAllTasks() {
-        return adapter.readAllTasks();
+    public List<TaskItem> readAllTasksWithType(VisaType type) {
+        return adapter.readAllTasksWithType(type);
     }
 
-    public void updateTask(int tid, TaskStatus newStatus) {
-        adapter.updateTask(tid, newStatus);
+    public void updateTaskStatus(int tid, TaskStatus newStatus) {
+        adapter.updateTaskStatus(tid, newStatus);
     }
 
     public void deleteTask(int tid) {

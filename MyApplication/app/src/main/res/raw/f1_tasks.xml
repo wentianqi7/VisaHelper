@@ -3,11 +3,13 @@
     <TaskItem>
         <id>1</id>
         <title>Complete the DS-160 Form</title>
+        <type>1</type>
         <description>Once you determine your visa type, the next step is to complete the DS-160 Form. Be sure to read the Guidelines for Completing the DS-160 Form carefully. All information must be correct and accurate. Once the form is submitted, you cannot make any changes. If you need assistance, please consult an immigration lawyer or translator. The call center cannot help you complete your DS-160. You will need your DS-160 number to book your appointment.</description>
     </TaskItem>
     <TaskItem>
         <id>2</id>
         <title>Pay visa fee ($160)</title>
+        <type>1</type>
         <description>To pay your visa fee, read the Bank and Payment Options page. This page explains how to make your visa fee payment. You will create a profile and must keep your receipt number to book your visa appointment.</description>
     </TaskItem>
 </TaskItems>

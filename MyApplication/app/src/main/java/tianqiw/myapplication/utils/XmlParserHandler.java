@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tianqiw.myapplication.model.TaskItem;
+import tianqiw.myapplication.model.enums.TaskStatus;
+import tianqiw.myapplication.model.enums.VisaType;
 
 /**
  * Created by STuotuo.Wen on 2016/4/3.
@@ -41,7 +43,8 @@ public class XmlParserHandler {
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
                         if (tagname.equalsIgnoreCase("taskitem")) {
-                            item = new TaskItem();
+                            // set last updated date to current time
+                            item = new TaskItem(TaskStatus.IN_PROGRESS);
                         }
                         break;
 
@@ -51,7 +54,7 @@ public class XmlParserHandler {
 
                     case XmlPullParser.END_TAG:
                         if (tagname.equalsIgnoreCase("taskitem")) {
-                            // add employee object to list
+                            // add task object to list
                             taskItemList.add(item);
                         } else if (tagname.equalsIgnoreCase("id")) {
                             item.setTid(Integer.parseInt(text));
@@ -59,6 +62,8 @@ public class XmlParserHandler {
                             item.setTitle(text);
                         } else if (tagname.equalsIgnoreCase("description")) {
                             item.setDescription(text);
+                        } else  if (tagname.equalsIgnoreCase("type")) {
+                            item.setType(VisaType.values()[Integer.parseInt(text)]);
                         }
                         break;
 

@@ -8,14 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import tianqiw.myapplication.R;
+import tianqiw.myapplication.entity.TaskManager;
 import tianqiw.myapplication.model.TaskItem;
+import tianqiw.myapplication.model.enums.TaskStatus;
 import tianqiw.myapplication.model.enums.VisaType;
 import tianqiw.myapplication.utils.XmlParserHandler;
 
@@ -30,7 +30,6 @@ public class TaskListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         VisaType visaType = VisaType.values()[getArguments().getInt(getString(R.string.visa_type))];
         getActivity().setTitle(String.format("VisaHelper - %s", visaType));
-        taskItemList = new ArrayList<TaskItem>();
         initTasks(visaType);
         TaskAdapter adapter = new TaskAdapter(taskItemList);
         setListAdapter(adapter);
@@ -42,15 +41,20 @@ public class TaskListFragment extends ListFragment {
     }
 
     private void initTasks(VisaType visaType) {
-        if (taskItemList == null) {
-            return;
-        }
+        // try to read all tasks from db
+        // if not exists, read from xml and insert into db
+        taskItemList = TaskManager.get(getActivity()).readAllTasksWithType(visaType);
+        if (taskItemList.size() == 0) {
+            XmlParserHandler xmlParserHandler = new XmlParserHandler();
+            switch (visaType) {
+                case F1:
+                    taskItemList = xmlParserHandler.parse(getResources().openRawResource(R.raw.f1_tasks));
+                    break;
+            }
 
-        XmlParserHandler xmlParserHandler = new XmlParserHandler();
-        switch (visaType) {
-            case F1:
-                taskItemList = xmlParserHandler.parse(getResources().openRawResource(R.raw.f1_tasks));
-                break;
+            for (TaskItem task : taskItemList) {
+                TaskManager.get(getActivity()).createTask(task);
+            }
         }
     }
 
@@ -77,18 +81,37 @@ public class TaskListFragment extends ListFragment {
             statusView.setText(task.getDate());
 
             CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
+
+            // set background color according to task status
+            switch (task.getStatus()) {
+                case UNDEFINED:
+
+                    break;
+                case IN_PROGRESS:
+                    // convertView.setBackgroundColor(getResources().getColor(R.color.colorTaskTrue));
+                    break;
+                case COMPLETED:
+                    checkBox.setChecked(true);
+                    convertView.setBackgroundColor(getResources().getColor(R.color.colorTaskFalse));
+                    break;
+            }
+
+            // change task status and background color according to checkbox
             final View tempView = convertView;
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
+                        TaskManager.get(getActivity()).updateTaskStatus(task.getTid(), TaskStatus.COMPLETED);
                         tempView.setBackgroundColor(getResources().getColor(R.color.colorTaskFalse));
                     } else {
+                        TaskManager.get(getActivity()).updateTaskStatus(task.getTid(), TaskStatus.IN_PROGRESS);
                         tempView.setBackgroundColor(getResources().getColor(R.color.colorTaskTrue));
                     }
                 }
             });
 
+            // expand to show details when touch on task
             final TextView descriptionView = (TextView) convertView.findViewById(R.id.description);
             descriptionView.setText(task.getDescription());
 

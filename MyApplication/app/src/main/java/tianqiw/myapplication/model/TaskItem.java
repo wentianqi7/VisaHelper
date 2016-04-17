@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import tianqiw.myapplication.model.enums.TaskStatus;
+import tianqiw.myapplication.model.enums.VisaType;
 
 /**
  * Created by STuotuo.Wen on 2016/4/2.
@@ -11,25 +12,27 @@ import tianqiw.myapplication.model.enums.TaskStatus;
 public class TaskItem {
     private int tid;
     private String title;
+    private VisaType type;
     private String date;
     private TaskStatus status;
     private String description;
 
-    public TaskItem() {
+    public TaskItem(TaskStatus status) {
         tid = 0;
         title = "Undefined";
+        type = VisaType.UNDEFINED;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         date = sdf.format(new Date());
-        status = TaskStatus.NEW;
+        this.status = status;
         description = "";
     }
 
-    public TaskItem(int tid, String title, String description) {
+    public TaskItem(int tid, String title, VisaType type, String date, TaskStatus status, String description) {
         this.tid = tid;
         this.title = title;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        this.date = sdf.format(new Date());
-        this.status = TaskStatus.NEW;
+        this.type = type;
+        this.date = date;
+        this.status = status;
         this.description = description;
     }
 
@@ -47,6 +50,14 @@ public class TaskItem {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setType(VisaType type) {
+        this.type = type;
+    }
+
+    public VisaType getType() {
+        return type;
     }
 
     public void setDate(String date) {
